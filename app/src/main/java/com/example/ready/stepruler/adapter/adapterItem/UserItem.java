@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.bean.adapterItem;
+package com.example.ready.stepruler.adapter.adapterItem;
 
 import android.widget.Button;
 import android.widget.TextView;

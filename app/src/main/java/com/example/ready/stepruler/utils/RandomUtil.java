@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.randomCode;
+package com.example.ready.stepruler.utils;
 
 
 import android.graphics.Bitmap;
@@ -8,7 +8,7 @@ import android.graphics.Paint;
 
 import java.util.Random;
 
-public class RandomCode {
+public class RandomUtil {
     //随机数数组
     private static final char[] CHARS = {
             '2', '3', '4', '5', '6', '7', '8', '9',
@@ -18,11 +18,11 @@ public class RandomCode {
             'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     };
 
-    private static RandomCode bmpCode;
+    private static RandomUtil bmpCode;
 
-    public static RandomCode getInstance() {
+    public static RandomUtil getInstance() {
         if(bmpCode == null)
-            bmpCode = new RandomCode();
+            bmpCode = new RandomUtil();
         return bmpCode;
     }
 

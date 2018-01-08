@@ -2,11 +2,11 @@ package com.example.ready.stepruler.module.push.article;
 
 import android.view.View;
 
-import com.example.ready.stepruler.bean.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingBean;
 import com.example.ready.stepruler.binder.BindItem;
-import com.example.ready.stepruler.binder.DiffCallback;
+import com.example.ready.stepruler.utils.DiffCallUtil;
 import com.example.ready.stepruler.module.base.BaseListFragment;
-import com.example.ready.stepruler.widget.OnLoadMoreListener;
+import com.example.ready.stepruler.widget.listener.OnLoadMoreListener;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class PushArticle extends BaseListFragment<IPushArticleView.Presenter> im
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
         newItems.add(new LoadingBean());//添加末尾的加载动画
-        DiffCallback.notifyDataSetChanged(oldItems, newItems, DiffCallback.ARTICLE, adapter);
+        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.ARTICLE, adapter);
         oldItems.clear();
         oldItems.addAll(newItems);
         //数据加载完，既可以刷新也可以加载

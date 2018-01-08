@@ -12,10 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.comment.CommentBean;
-import com.example.ready.stepruler.bean.community.CommunityBean;
 import com.example.ready.stepruler.api.CommentApi;
 import com.example.ready.stepruler.api.CommunityApi;
+import com.example.ready.stepruler.bean.comment.CommentBean;
+import com.example.ready.stepruler.bean.community.CommunityBean;
+import com.example.ready.stepruler.utils.RetrofitFactory;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
@@ -29,8 +30,6 @@ import me.drakeet.multitype.ItemViewBinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by single dog on 2017/12/28.
@@ -38,12 +37,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CommunityMeViewBinder extends ItemViewBinder<CommunityBean,CommunityMeViewBinder.ViewHolder>{
     private static final String Tag="CommunityMeViewBinder";
-    Retrofit retrofit=new Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.0.2.2:8080/")
-                            .build();
-    CommunityApi communityApi=retrofit.create(CommunityApi.class);
-    CommentApi commentApi=retrofit.create(CommentApi.class);
+    CommunityApi communityApi= RetrofitFactory.getRetrofit().create(CommunityApi.class);
+    CommentApi commentApi=RetrofitFactory.getRetrofit().create(CommentApi.class);
 
 
     @Nonnull

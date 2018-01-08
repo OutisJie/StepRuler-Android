@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.binder;
+package com.example.ready.stepruler.utils;
 
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import com.example.ready.stepruler.bean.push.PushArticleDataBean;
 import java.util.List;
 
 
-public class DiffCallback extends DiffUtil.Callback {
+public class DiffCallUtil extends DiffUtil.Callback {
 
     public static final int ARTICLE = 1;
     public static final int PHOTO = 2;
@@ -20,15 +20,15 @@ public class DiffCallback extends DiffUtil.Callback {
     private List oldList, newList;
     private int type;
 
-    public DiffCallback(List oldList, List newList, int type) {
+    public DiffCallUtil(List oldList, List newList, int type) {
         this.oldList = oldList;
         this.newList = newList;
         this.type = type;
     }
 
     public static void notifyDataSetChanged(List oldList, List newList, int type, RecyclerView.Adapter adapter) {
-        DiffCallback diffCallback = new DiffCallback(oldList, newList, type);
-        DiffUtil.DiffResult result = DiffUtil.calculateDiff(diffCallback, true);
+        DiffCallUtil diffCallUtil = new DiffCallUtil(oldList, newList, type);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(diffCallUtil, true);
         result.dispatchUpdatesTo(adapter);
     }
 

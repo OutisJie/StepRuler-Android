@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.widget;
+package com.example.ready.stepruler.widget.listener;
 
 import android.support.design.widget.AppBarLayout;
 

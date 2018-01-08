@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.adapterItem.ArticleItem;
+import com.example.ready.stepruler.adapter.adapterItem.ArticleItem;
 import com.example.ready.stepruler.bean.push.PushArticleDataBean;
 import com.example.ready.stepruler.module.push.content.ArticleContentActivity;
 

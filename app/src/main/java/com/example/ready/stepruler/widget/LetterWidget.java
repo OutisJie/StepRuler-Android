@@ -19,15 +19,15 @@ import de.greenrobot.event.EventBus;
  * 此处仅在滑动或点击时发送 MemberLetterEvent，接收方自己处理相关逻辑
  * 注意：因为长按事件等触发，有可能重复发送
  */
-public class LetterView extends LinearLayout {
+public class LetterWidget extends LinearLayout {
 
-  public LetterView(Context context) {
+  public LetterWidget(Context context) {
     super(context);
     setOrientation(VERTICAL);
     updateLetters();
   }
 
-  public LetterView(Context context, AttributeSet attrs) {
+  public LetterWidget(Context context, AttributeSet attrs) {
     super(context, attrs);
     setOrientation(VERTICAL);
     updateLetters();

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ready.stepruler.binder.BindItem;
-import com.example.ready.stepruler.widget.OnLoadMoreListener;
+import com.example.ready.stepruler.widget.listener.OnLoadMoreListener;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.diary.DiaryBean;
 import com.example.ready.stepruler.database.DiaryDataBaseHelper;

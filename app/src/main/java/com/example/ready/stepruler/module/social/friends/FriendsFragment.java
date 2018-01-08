@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.activity.MainActivity;
-import com.example.ready.stepruler.bean.friends.UserBean;
+import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.binder.friends.FriendsViewBinder;
 import com.example.ready.stepruler.module.social.UserProvider;
-import com.example.ready.stepruler.widget.LetterView;
+import com.example.ready.stepruler.widget.LetterWidget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +143,7 @@ public class FriendsFragment extends Fragment implements IFriendsView.View {
      * 处理 LetterView 发送过来的 MemberLetterEvent
      * 会通过 MembersAdapter 获取应该要跳转到的位置，然后跳转
      */
-    public void onEvent(LetterView.MemberLetterEvent event) {
+    public void onEvent(LetterWidget.MemberLetterEvent event) {
         Character targetChar = Character.toLowerCase(event.letter);
         if (itemAdapter.getIndexMap().containsKey(targetChar)) {
             int index = itemAdapter.getIndexMap().get(targetChar);

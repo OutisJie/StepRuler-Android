@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.bean.friends;
+package com.example.ready.stepruler.bean.user;
 
 /**
  * Created by ready on 2018/1/3.
@@ -9,6 +9,7 @@ public class UserBean {
     private String userName;
     private String userPwd;
     private String device;
+    private String userImg;
 
     public int getUserId() {
         return userId;
@@ -40,5 +41,13 @@ public class UserBean {
 
     public void setDevice(String device) {
         this.device = device;
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
     }
 }

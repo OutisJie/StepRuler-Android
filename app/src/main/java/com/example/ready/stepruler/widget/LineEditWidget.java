@@ -17,20 +17,20 @@ import android.widget.EditText;
  */
 
 @SuppressLint("AppCompatCustomView")
-public class LinedEditText extends EditText {
+public class LineEditWidget extends EditText {
     private Paint mPaint;
 
-    public LinedEditText(Context context) {
+    public LineEditWidget(Context context) {
         super(context);
         initPaint();
     }
 
-    public LinedEditText(Context context, AttributeSet attrs) {
+    public LineEditWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
         initPaint();
     }
 
-    public LinedEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LineEditWidget(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initPaint();
     }

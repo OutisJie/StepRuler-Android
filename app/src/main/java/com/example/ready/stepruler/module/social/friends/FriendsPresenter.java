@@ -5,7 +5,7 @@ import android.widget.Toast;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.activity.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
-import com.example.ready.stepruler.bean.friends.UserBean;
+import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.utils.AppManager;
 import com.example.ready.stepruler.utils.RetrofitFactory;
 

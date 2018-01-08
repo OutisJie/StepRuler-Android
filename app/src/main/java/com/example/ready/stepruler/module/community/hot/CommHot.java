@@ -2,12 +2,12 @@ package com.example.ready.stepruler.module.community.hot;
 
 import android.view.View;
 
-import com.example.ready.stepruler.bean.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingBean;
 import com.example.ready.stepruler.binder.BindItem;
-import com.example.ready.stepruler.binder.DiffCallback;
+import com.example.ready.stepruler.utils.DiffCallUtil;
 import com.example.ready.stepruler.module.base.BaseListFragment;
 import com.example.ready.stepruler.module.community.ICommunityView;
-import com.example.ready.stepruler.widget.OnLoadMoreListener;
+import com.example.ready.stepruler.widget.listener.OnLoadMoreListener;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class CommHot extends BaseListFragment<ICommunityView.Presenter> implemen
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
         newItems.add(new LoadingBean());
-        DiffCallback.notifyDataSetChanged(oldItems, newItems, DiffCallback.HOT_COMMUNITY, adapter);
+        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.HOT_COMMUNITY, adapter);
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = true;

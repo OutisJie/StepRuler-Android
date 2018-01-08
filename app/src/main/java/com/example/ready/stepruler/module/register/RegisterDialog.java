@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.module.login.User;
-import com.example.ready.stepruler.randomCode.RandomCode;
+import com.example.ready.stepruler.utils.RandomUtil;
 
 
 public class RegisterDialog extends Dialog implements View.OnClickListener,RegisterView{
@@ -59,8 +59,8 @@ public class RegisterDialog extends Dialog implements View.OnClickListener,Regis
         cancleButton=(Button)findViewById(R.id.button2);
         imageView=(ImageView)findViewById(R.id.imageView);
         //将验证码用图片的形式显示出来
-        imageView.setImageBitmap(RandomCode.getInstance().createBitmap());
-        realCode = RandomCode.getInstance().getCode().toLowerCase();
+        imageView.setImageBitmap(RandomUtil.getInstance().createBitmap());
+        realCode = RandomUtil.getInstance().getCode().toLowerCase();
     }
 
     public void setListener(){
@@ -135,8 +135,8 @@ public class RegisterDialog extends Dialog implements View.OnClickListener,Regis
                     break;
                 }
             case R.id.imageView:
-                imageView.setImageBitmap(RandomCode.getInstance().createBitmap());
-                realCode = RandomCode.getInstance().getCode().toLowerCase();
+                imageView.setImageBitmap(RandomUtil.getInstance().createBitmap());
+                realCode = RandomUtil.getInstance().getCode().toLowerCase();
                 break;
             case R.id.button2:
                 hide();

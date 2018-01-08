@@ -17,7 +17,7 @@ import com.example.ready.stepruler.R;
  * Created by ready on 2018/1/5.
  * 显示步数的圆弧
  */
-public class StepArcView extends View {
+public class StepArcWidget extends View {
 
     /**
      * 圆弧的宽度
@@ -48,15 +48,15 @@ public class StepArcView extends View {
      */
     private int animationLength = 3000;
 
-    public StepArcView(Context context) {
+    public StepArcWidget(Context context) {
         super(context);
     }
 
-    public StepArcView(Context context, AttributeSet attrs) {
+    public StepArcWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public StepArcView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StepArcWidget(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

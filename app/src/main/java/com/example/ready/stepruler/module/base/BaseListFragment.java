@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.RxBus;
-import com.example.ready.stepruler.bean.LoadingEndBean;
+import com.example.ready.stepruler.bean.end.LoadingEndBean;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

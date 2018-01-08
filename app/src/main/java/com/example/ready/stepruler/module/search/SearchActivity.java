@@ -12,12 +12,13 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.push.PushArticleDataBean;
-import com.example.ready.stepruler.api.UserApi;
-import com.example.ready.stepruler.api.ArticleApi;
 import com.example.ready.stepruler.adapter.MyAdapter;
 import com.example.ready.stepruler.adapter.MyArticleAdapter;
+import com.example.ready.stepruler.api.ArticleApi;
+import com.example.ready.stepruler.api.UserApi;
+import com.example.ready.stepruler.bean.push.PushArticleDataBean;
 import com.example.ready.stepruler.utils.AppManager;
+import com.example.ready.stepruler.utils.RetrofitFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +26,6 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by single dog on 2017/12/28.
@@ -46,13 +45,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ArrayList<String> names = new ArrayList<>();
     private ArrayList<PushArticleDataBean> articles = new ArrayList<>();
 
-    private Retrofit retrofit = new Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://10.0.2.2:8080/")
-            .build();
 
-    private UserApi userApi = retrofit.create(UserApi.class);
-    private ArticleApi articleApi = retrofit.create(ArticleApi.class);
+    private UserApi userApi = RetrofitFactory.getRetrofit().create(UserApi.class);
+    private ArticleApi articleApi =  RetrofitFactory.getRetrofit().create(ArticleApi.class);
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);

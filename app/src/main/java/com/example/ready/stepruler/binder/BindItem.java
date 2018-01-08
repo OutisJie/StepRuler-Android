@@ -3,8 +3,8 @@ package com.example.ready.stepruler.binder;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.example.ready.stepruler.bean.LoadingBean;
-import com.example.ready.stepruler.bean.LoadingEndBean;
+import com.example.ready.stepruler.bean.end.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingEndBean;
 import com.example.ready.stepruler.bean.community.CommunityBean;
 import com.example.ready.stepruler.bean.diary.DiaryBean;
 import com.example.ready.stepruler.bean.push.PushArticleDataBean;
@@ -12,6 +12,8 @@ import com.example.ready.stepruler.binder.community.CommunityFollViewBinder;
 import com.example.ready.stepruler.binder.community.CommunityMeViewBinder;
 import com.example.ready.stepruler.binder.community.CommunityViewBinder;
 import com.example.ready.stepruler.binder.diary.DiaryViewBinder;
+import com.example.ready.stepruler.binder.end.LoadingEndViewBinder;
+import com.example.ready.stepruler.binder.end.LoadingViewBinder;
 import com.example.ready.stepruler.binder.push.PushArticleImgViewBinder;
 import com.example.ready.stepruler.binder.push.PushArticleTextViewBinder;
 

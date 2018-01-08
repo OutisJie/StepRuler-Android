@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <com.example.ready.stepruler.widget.StepArcView
+        <com.example.ready.stepruler.widget.StepArcWidget
             android:id="@+id/stepcircle"
             android:layout_width="200dp"
             android:layout_height="200dp"

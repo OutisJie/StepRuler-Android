@@ -45,7 +45,7 @@
                     android:paddingRight="20dp"
                     android:layout_marginBottom="20dp"
                     android:scrollbars="vertical" />
-                <com.example.ready.stepruler.widget.LinedEditText
+                <com.example.ready.stepruler.widget.LineEditWidget
                     android:id="@+id/et_editor_diary_content"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

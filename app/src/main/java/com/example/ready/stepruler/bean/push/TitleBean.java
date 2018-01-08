@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.bean;
+package com.example.ready.stepruler.bean.push;
 
 /**
  * Created by single dog on 2018/1/2.

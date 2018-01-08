@@ -18,7 +18,7 @@ import com.avos.avoscloud.SendCallback;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.activity.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
-import com.example.ready.stepruler.bean.adapterItem.UserItem;
+import com.example.ready.stepruler.adapter.adapterItem.UserItem;
 import com.example.ready.stepruler.utils.RetrofitFactory;
 
 import java.util.ArrayList;

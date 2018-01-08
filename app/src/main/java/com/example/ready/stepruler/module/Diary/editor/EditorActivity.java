@@ -17,7 +17,7 @@ import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.database.DiaryDataBaseHelper;
 import com.example.ready.stepruler.module.Diary.diarys.DiaryTabLayout;
 import com.example.ready.stepruler.utils.AppManager;
-import com.example.ready.stepruler.widget.LinedEditText;
+import com.example.ready.stepruler.widget.LineEditWidget;
 
 import cc.trity.floatingactionbutton.FloatingActionButton;
 
@@ -25,7 +25,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorView {
     private Toolbar toolbar;
     private TextView tv_editor_diary_date;
     private EditText et_editor_diary_title;
-    private LinedEditText et_editor_diary_content;
+    private LineEditWidget et_editor_diary_content;
     private FloatingActionButton fb_editor_diary_save;
     private FloatingActionButton fb_editor_diary_cancel;
     private EditorPresenter editorPresenter;
@@ -67,7 +67,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorView {
         et_editor_diary_title = (EditText) findViewById(R.id.et_editor_diary_title);
         et_editor_diary_title.setText(intent.getStringExtra("title"));
 
-        et_editor_diary_content = (LinedEditText) findViewById(R.id.et_editor_diary_content);
+        et_editor_diary_content = (LineEditWidget) findViewById(R.id.et_editor_diary_content);
         et_editor_diary_content.setText(intent.getStringExtra("content"));
 
         fb_editor_diary_save = (FloatingActionButton) findViewById(R.id.fb_editor_diary_save);

@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.binder;
+package com.example.ready.stepruler.binder.end;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingBean;
 
 import me.drakeet.multitype.ItemViewBinder;
 

@@ -17,7 +17,7 @@ import com.example.ready.stepruler.BuildConfig;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.push.PushArticleDataBean;
 import com.example.ready.stepruler.module.push.content.ArticleContentActivity;
-import com.example.ready.stepruler.utils.ImageLoader;
+import com.example.ready.stepruler.utils.ImageLoadUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.concurrent.TimeUnit;
@@ -47,7 +47,7 @@ public class PushArticleImgViewBinder extends ItemViewBinder<PushArticleDataBean
             //图片
             final String imgUrl = item.getArticleImg();
             if (!TextUtils.isEmpty(imgUrl)) {
-                ImageLoader.loadCenterCrop(context, imgUrl, holder.iv_image, R.color.viewBackground);
+                ImageLoadUtil.loadCenterCrop(context, imgUrl, holder.iv_image, R.color.viewBackground);
             }
 
             String tv_title = item.getArticleTitle();

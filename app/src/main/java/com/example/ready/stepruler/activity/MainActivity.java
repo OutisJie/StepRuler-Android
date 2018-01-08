@@ -1,12 +1,15 @@
 package com.example.ready.stepruler.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,19 +20,43 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.friends.UserBean;
-import com.example.ready.stepruler.module.social.FriendsActivity;
-import com.example.ready.stepruler.module.login.LoginActivity;
+import com.example.ready.stepruler.api.UserApi;
+import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.module.Diary.diarys.DiaryTabLayout;
 import com.example.ready.stepruler.module.Step.StepTabLayout;
 import com.example.ready.stepruler.module.community.CommunityTabLayout;
+import com.example.ready.stepruler.module.login.LoginActivity;
 import com.example.ready.stepruler.module.push.PushTabLayout;
 import com.example.ready.stepruler.module.search.SearchActivity;
+import com.example.ready.stepruler.module.social.FriendsActivity;
 import com.example.ready.stepruler.utils.AppManager;
-import com.example.ready.stepruler.widget.BottomNavigationViewHelper;
+import com.example.ready.stepruler.utils.ImageLoadUtil;
+import com.example.ready.stepruler.utils.RetrofitFactory;
+import com.example.ready.stepruler.widget.BottomNavigationWidget;
+import com.yancy.gallerypick.config.GalleryConfig;
+import com.yancy.gallerypick.config.GalleryPick;
+import com.yancy.gallerypick.inter.IHandlerCallBack;
+import com.yancy.gallerypick.inter.ImageLoader;
+import com.yancy.gallerypick.widget.GalleryImageView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String POSITION = "position";
     private static final String SELECT_ITEM = "bottomNavigationSelectItem";
@@ -45,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView mBottomNavigationView;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private ImageView mImageView;
     private long firstClickTime = 0;
     private long exitTime = 0;
     private int position;
@@ -53,11 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static boolean isLogin = false;
     private static UserBean user = new UserBean();
 
-    public static void  startActivity(Context context){
+    public static void startActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         AppManager.getAppManager().finishActivity(context.getClass());
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,16 +107,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void initView(){
+    private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_activity_main);
-        setSupportActionBar(toolbar);
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        View centerHeader = mNavigationView.inflateHeaderView(R.layout.na_center_header);
+        mImageView = (ImageView) centerHeader.findViewById(R.id.image_center_header);
+
+        setSupportActionBar(toolbar);
+        BottomNavigationWidget.disableShiftMode(mBottomNavigationView);
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_push:
                         showFragment(FRAGMENT_PUSH);
                         doubleClick(FRAGMENT_PUSH);
@@ -106,34 +140,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             }
         });
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+
         mNavigationView.setNavigationItemSelectedListener(this);
-        View centerHeader = mNavigationView.inflateHeaderView(R.layout.na_center_header);
-        ImageView mImageView = (ImageView) centerHeader.findViewById(R.id.image_center_header);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLogin==false){
+                if (isLogin == false) {
                     finish();
                     Intent login = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(login);
-                }else {
+                } else {
                     //修改头像界面
-                    String s = String.valueOf(user.getUserId());
-                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                    requesrRermission();
                 }
 
             }
         });
     }
+
     private void doubleClick(int index) {
         long secondClickTime = System.currentTimeMillis();
-        if(secondClickTime - firstClickTime < 500){
-            switch (index){
+        if (secondClickTime - firstClickTime < 500) {
+            switch (index) {
                 case FRAGMENT_PUSH:
                     mPushTabLayout.onDoubleClick();
                     break;
@@ -141,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mCommunityTabLayout.onDoubleClick();
                     break;
             }
-        }else {
+        } else {
             firstClickTime = secondClickTime;
         }
     }
@@ -150,40 +182,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         hideFragment(ft);
         position = index;
-        switch (index){
+        switch (index) {
             case FRAGMENT_PUSH:
                 toolbar.setTitle(R.string.title_push);
-                if(mPushTabLayout == null){
+                if (mPushTabLayout == null) {
                     mPushTabLayout = PushTabLayout.getInstance();
                     ft.add(R.id.container, mPushTabLayout, PushTabLayout.class.getName());
-                }else {
+                } else {
                     ft.show(mPushTabLayout);
                 }
                 break;
             case FRAGMENT_COMMUNITY:
                 toolbar.setTitle(R.string.title_community);
-                if(mCommunityTabLayout == null){
+                if (mCommunityTabLayout == null) {
                     mCommunityTabLayout = CommunityTabLayout.getInstance();
                     ft.add(R.id.container, mCommunityTabLayout, CommunityTabLayout.class.getName());
-                }else {
+                } else {
                     ft.show(mCommunityTabLayout);
                 }
                 break;
             case FRAGMENT_DIARY:
                 toolbar.setTitle(R.string.title_diary);
-                if (mDiaryTabLayout == null){
+                if (mDiaryTabLayout == null) {
                     mDiaryTabLayout = DiaryTabLayout.getInstace();
                     ft.add(R.id.container, mDiaryTabLayout, DiaryTabLayout.class.getName());
-                }else {
+                } else {
                     ft.show(mDiaryTabLayout);
                 }
                 break;
             case FRAGMENT_STEP:
                 toolbar.setTitle(R.string.title_step);
-                if(mStepTabLayout == null){
+                if (mStepTabLayout == null) {
                     mStepTabLayout = StepTabLayout.getInstance();
                     ft.add(R.id.container, mStepTabLayout, StepTabLayout.class.getName());
-                }else {
+                } else {
                     ft.show(mStepTabLayout);
                 }
                 break;
@@ -193,19 +225,124 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void hideFragment(FragmentTransaction ft) {
         //如果几个fragment不为空，就先隐藏起来
-        if(mPushTabLayout != null){
+        if (mPushTabLayout != null) {
             ft.hide(mPushTabLayout);
         }
-        if(mCommunityTabLayout != null){
+        if (mCommunityTabLayout != null) {
             ft.hide(mCommunityTabLayout);
         }
-        if(mDiaryTabLayout != null){
+        if (mDiaryTabLayout != null) {
             ft.hide(mDiaryTabLayout);
         }
-        if(mStepTabLayout != null){
+        if (mStepTabLayout != null) {
             ft.hide(mStepTabLayout);
         }
     }
+
+    private void requesrRermission() {
+        if (ContextCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE") == 0) {
+            openGallery();
+        } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, "android.permission.WRITE_EXTERNAL_STORAGE")) {
+            Toast.makeText(this, "请在 设置-应用管理 中开启此应用的储存授权。", Toast.LENGTH_SHORT).show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"}, 2);
+        }
+    }
+
+    private void openGallery() {
+        GalleryPick.getInstance()
+                .setGalleryConfig(new GalleryConfig.Builder()
+                        .imageLoader(new ImageLoader() {
+                            @Override
+                            public void displayImage(Activity activity, Context context, String path, GalleryImageView galleryImageView, int width, int height) {
+                                RequestOptions requestOptions = new RequestOptions();
+                                requestOptions.centerCrop();
+                                Glide.with(context).load(path).apply(requestOptions).into(galleryImageView);
+                            }
+
+                            @Override
+                            public void clearMemoryCache() {
+
+                            }
+                        })
+                        .iHandlerCallBack(new IHandlerCallBack() {
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(List<String> photoList) {
+                                if (photoList.size() > 0) {
+                                    updatePhoto(photoList.get(0));
+                                }
+                            }
+
+                            @Override
+                            public void onCancel() {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        })
+                        .provider("com.yancy.gallerypickdemo.fileprovider")
+                        .pathList(new ArrayList<String>())
+                        .multiSelect(false)
+                        .maxSize(9)
+                        .crop(true)
+                        .isShowCamera(true)
+                        .filePath("/Gallery/Pictures")
+                        .build())
+                .open(this);
+    }
+
+    private void updatePhoto (final String filename) {
+            Luban.with(this)
+                .load(filename)
+                .ignoreBy(100)
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        String type = filename.substring(filename.lastIndexOf(".") + 1);
+                        MultipartBody.Part photo = MultipartBody.Part.createFormData("photo",
+                                file.getName(), RequestBody.create(MediaType.parse("image/" + type),
+                                        file));
+                        Observable<String> ob = RetrofitFactory.getRetrofit().create(UserApi.class).updatePhoto(user.getUserId(), photo);
+                        ob.subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        ImageLoadUtil.loadCenterCrop(MainActivity.this, s, mImageView, R.color.viewBackground);
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(MainActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(MainActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+                    }
+                }).launch();
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // recreate 时记录当前位置 (在 Manifest 已禁止 Activity 旋转,所以旋转屏幕并不会执行以下代码)
@@ -218,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         long currentTime = System.currentTimeMillis();
         if ((currentTime - exitTime) < 2000) {
             super.onBackPressed();
-            AppManager.getAppManager().AppExit(this );
+            AppManager.getAppManager().AppExit(this);
         } else {
             Toast.makeText(this, R.string.double_click_exit, Toast.LENGTH_SHORT).show();
             exitTime = currentTime;
@@ -227,13 +364,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_main,menu);
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_search){
+        if (item.getItemId() == R.id.action_search) {
             SearchActivity.startActivity(this);
         }
         return super.onOptionsItemSelected(item);
@@ -265,27 +402,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    private void getUserInformation(){
-        Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
+    private void getUserInformation() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
         try {
             user.setUserId(bundle.getInt("user_id"));
             user.setUserName(bundle.getString("user_name"));
-            if(!user.getUserName().equals("") || user.getUserName() != null)
-                isLogin=true;
-        }catch (NullPointerException e){
+            if (!user.getUserName().equals("") || user.getUserName() != null)
+                isLogin = true;
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean getLoginState(){return isLogin;}
-//    public static int getUserid(){
-//        return user.getUserId();
-//    }
-//    public static String getUsername(){
-//        return user.getUserName();
-//    }
-    public static UserBean getUser(){
+    public static boolean getLoginState() {
+        return isLogin;
+    }
+
+    public static UserBean getUser() {
         return user;
     }
 }

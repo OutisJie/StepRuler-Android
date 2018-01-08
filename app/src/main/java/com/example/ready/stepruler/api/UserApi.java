@@ -1,17 +1,20 @@
 package com.example.ready.stepruler.api;
 
-import com.example.ready.stepruler.bean.friends.UserBean;
+import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.module.login.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -40,4 +43,9 @@ public interface UserApi {
     //获取好友列表
     @GET(value = "/user/friends")
     Observable<List<UserBean>> getFriends(@Query("user_id") int user_id);
+
+    //上传头像
+    @POST(value = "/user/postImg")
+    @Multipart
+    Observable<String> updatePhoto(@Query("user_id") int user_id, @Part MultipartBody.Part photo);
 }

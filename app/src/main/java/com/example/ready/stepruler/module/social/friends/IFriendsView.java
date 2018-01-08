@@ -1,6 +1,6 @@
 package com.example.ready.stepruler.module.social.friends;
 
-import com.example.ready.stepruler.bean.friends.UserBean;
+import com.example.ready.stepruler.bean.user.UserBean;
 
 import java.util.List;
 

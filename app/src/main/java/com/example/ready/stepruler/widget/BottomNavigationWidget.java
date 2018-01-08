@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * http://stackoverflow.com/questions/40176244/how-to-disable-bottomnavigationview-shift-mode
  */
 
-public class BottomNavigationViewHelper {
+public class BottomNavigationWidget {
 
     @SuppressLint("RestrictedApi")
     public static void disableShiftMode(BottomNavigationView view) {

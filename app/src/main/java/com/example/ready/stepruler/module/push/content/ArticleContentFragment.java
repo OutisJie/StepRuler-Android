@@ -29,8 +29,8 @@ import android.widget.ImageView;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.push.PushArticleDataBean;
-import com.example.ready.stepruler.utils.ImageLoader;
-import com.example.ready.stepruler.widget.AppBarStateChangeListener;
+import com.example.ready.stepruler.utils.ImageLoadUtil;
+import com.example.ready.stepruler.widget.listener.AppBarStateChangeListener;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -138,7 +138,7 @@ public class ArticleContentFragment extends RxFragment implements IArticleConten
             article_imageView = (ImageView) view.findViewById(R.id.article_image);
         }
         if (isHasImage) {
-            ImageLoader.loadCenterCrop(getActivity(), bundle.getString(IMG), article_imageView, R.mipmap.error_image, R.mipmap.error_image);
+            ImageLoadUtil.loadCenterCrop(getActivity(), bundle.getString(IMG), article_imageView, R.mipmap.error_image, R.mipmap.error_image);
             article_barLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
                 @Override
                 public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {

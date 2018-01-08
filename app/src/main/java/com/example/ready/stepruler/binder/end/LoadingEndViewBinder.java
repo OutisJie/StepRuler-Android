@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.binder;
+package com.example.ready.stepruler.binder.end;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.LoadingEndBean;
+import com.example.ready.stepruler.bean.end.LoadingEndBean;
 
 import me.drakeet.multitype.ItemViewBinder;
 

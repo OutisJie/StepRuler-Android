@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.bean.adapterItem.CommentItem;
+import com.example.ready.stepruler.adapter.adapterItem.CommentItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

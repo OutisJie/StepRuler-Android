@@ -4,16 +4,19 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 
 
-public class ImageLoader {
+public class ImageLoadUtil {
 
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
         if (!NetWorkUtil.isMobileConnected(context)) {
             view.setImageResource(defaultResId);
         } else {
-            Glide.with(context).load(url).crossFade().centerCrop().into(view);
+            RequestOptions options = new RequestOptions().centerCrop();
+            Glide.with(context).load(url).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(view);
         }
     }
 
@@ -24,7 +27,8 @@ public class ImageLoader {
         if (!NetWorkUtil.isMobileConnected(context)) {
             view.setImageResource(defaultResId);
         } else {
-            Glide.with(context).load(url).crossFade().centerCrop().error(errorResId).into(view);
+            RequestOptions options = new RequestOptions().centerCrop().error(errorResId);
+            Glide.with(context).load(url).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(view);
         }
     }
 
@@ -32,6 +36,7 @@ public class ImageLoader {
      * 带监听处理
      */
     public static void loadCenterCrop(Context context, String url, ImageView view, RequestListener listener) {
-        Glide.with(context).load(url).crossFade().centerCrop().listener(listener).into(view);
+        RequestOptions options = new RequestOptions().centerCrop();
+        Glide.with(context).load(url).transition(DrawableTransitionOptions.withCrossFade()).listener(listener).into(view);
     }
 }

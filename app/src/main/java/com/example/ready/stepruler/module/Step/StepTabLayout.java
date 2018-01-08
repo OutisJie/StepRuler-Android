@@ -22,7 +22,7 @@ import com.example.ready.stepruler.adapter.CommonViewHolder;
 import com.example.ready.stepruler.bean.step.StepBean;
 import com.example.ready.stepruler.database.StepDBHelper;
 import com.example.ready.stepruler.module.Step.accelerate.StepService;
-import com.example.ready.stepruler.widget.StepArcView;
+import com.example.ready.stepruler.widget.StepArcWidget;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class StepTabLayout extends Fragment {
 
     //控件
     private TextView isSupport;
-    private StepArcView stepArcView;
+    private StepArcWidget stepArcWidget;
     private ListView listView;
 
     public static StepTabLayout getInstance() {
@@ -59,7 +59,7 @@ public class StepTabLayout extends Fragment {
 
     private void initData() {
         //设置当前步数为0
-        stepArcView.setCurrentCount(1000, 0);
+        stepArcWidget.setCurrentCount(1000, 0);
         isSupport.setText("计步中...");
 
         setEmptyView(listView);
@@ -82,7 +82,7 @@ public class StepTabLayout extends Fragment {
 
     private void initView(View view) {
         isSupport = (TextView) view.findViewById(R.id.tv_isSupport);
-        stepArcView = (StepArcView) view.findViewById(R.id.stepcircle);
+        stepArcWidget = (StepArcWidget) view.findViewById(R.id.stepcircle);
         listView = (ListView) view.findViewById(R.id.lv_history);
     }
 
@@ -113,12 +113,12 @@ public class StepTabLayout extends Fragment {
         public void onServiceConnected(ComponentName name, IBinder service) {
             StepService stepService = ((StepService.StepBinder) service).getService();
             //设置初始化数据
-            stepArcView.setCurrentCount(1000, stepService.getStepCount());
+            stepArcWidget.setCurrentCount(1000, stepService.getStepCount());
             //设置步数监听回调
             stepService.registerCallback(new UpdateUiCallBack() {
                 @Override
                 public void updateUi(int stepCount) {
-                    stepArcView.setCurrentCount(1000, stepCount);
+                    stepArcWidget.setCurrentCount(1000, stepCount);
                     List<StepBean> stepDatas = StepDBHelper.getQueryAll(StepBean.class);
                     // Logger.d("stepDatas="+stepDatas);
                     listView.setAdapter(new CommonAdapter<StepBean>(instance.getContext(), stepDatas, R.layout.item_step_history) {
