@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <com.example.ready.stepruler.widget.StepArcView
+            android:id="@+id/stepcircle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp" />
+
+        <TextView
+            android:id="@+id/tv_isSupport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stepcircle"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="该设备支持计步"
+            android:textColor="#333333" />
+        <TextView
+            android:id="@+id/tv_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/stepcircle"
+            android:layout_marginTop="50dp"
+            android:drawableLeft="@drawable/ic_step_history"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="历史步数"
+            android:textColor="#333333" />
+        <ListView
+            android:id="@+id/lv_history"
+            android:layout_below="@+id/tv_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</LinearLayout>

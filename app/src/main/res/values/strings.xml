@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">步尺</string>
+    <string name="action_search">搜索</string>
+
+    <string name="title_push">推送</string>
+    <string name="push_type_article">文章</string>
+    <string name="article_comment">评论</string>
+    <string name="article_share">分享</string>
+
+    <string name="push_type_photo">图片</string>
+
+    <string name="title_community">社区</string>
+    <string name="community_type_hot">热门</string>
+    <string name="community_type_follow">关注</string>
+    <string name="title_diary">日记</string>
+    <string name="diaty_tips">今天，你什么也没写下...</string>
+    <string name="diary_edit">编辑</string>
+    <string name="diary_save">保存</string>
+    <string name="diary_share">分享</string>
+    <string name="diary_delete">删除</string>
+    <string name="diary_help">帮助</string>
+    <string name="diary_more_option">其他操作</string>
+    <string name="title_step">计步器</string>
+    <string name="double_click_exit">再按一次退出程序</string>
+    <string name="diary_hint_desc">没有日记记录</string>
+
+    <string name="account_name">用户名</string>
+    <string name="setting">设置</string>
+    <string name="friends">我的好友</string>
+    <string name="history">我的文章</string>
+    <string name="change">更换主题</string>
+    <string name="exit">退出登录</string>
+    <string name="navigation_drawer_open">打开侧栏</string>
+    <string name="navigation_drawer_close">关闭侧栏</string>
+
+    <string name="network_error">网络不给力</string>
+
+    <string-array name="search_list">
+        <item>用户</item>
+        <item>文章</item>
+    </string-array>
+    <string name="title_activity_friends">我的好友</string>
+    <string name="friends_hint_desc">您现在一个好友都没有哦</string>
+    <string name="please_login">您还没有登录</string>
+    <string name="action_settings">Settings</string>
+</resources>

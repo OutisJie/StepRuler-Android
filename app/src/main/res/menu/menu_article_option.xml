@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_comment"
+        android:checkable="false"
+        android:enabled="false"
+        android:icon="@drawable/ic_comment_white_24dp"
+        android:title="@string/article_comment"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:title="@string/diary_share"
+        app:showAsAction="always"/>
+</menu>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_diary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingRight="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10.8dp"
+        android:background="#ffffff">
+        <ImageView
+            android:id="@+id/iv_diary_circle"
+            android:paddingTop="2dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/circle_orange"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/tv_diary_date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="4dp"
+            android:paddingTop="1dp"
+            android:text="2017年12月14日"
+            android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/iv_diary_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/ic_dots_horizontal_grey500_24dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="23dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/linear_style">
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:paddingTop="3dp"
+                android:background="#ffffff"
+                android:id="@+id/tv_diary_title"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="修仙修仙"
+                android:textColor="@color/Black"
+                android:textSize="19sp"/>
+            <TextView
+                android:paddingTop="2dp"
+                android:background="#ffffff"
+                android:id="@+id/tv_diary_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4dp"
+                android:paddingLeft="15dp"
+                android:text="写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛写个毛"
+                android:textColor="#1d1c1c"
+                android:textSize="16sp"/>
+            <RelativeLayout
+                android:id="@+id/rl_diary_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingRight="5dp"
+                android:background="#ffffff">
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_more_option"
+        android:orderInCategory="83"
+        android:title="@string/diary_more_option"
+        android:icon="@drawable/ic_add_white_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="82"
+        android:title="@string/diary_save"
+        android:icon="@drawable/ic_diary_save"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
+        android:title="@string/diary_share"
+        android:orderInCategory="84"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_helper"
+        android:icon="@drawable/ic_diary_helper"
+        android:title="@string/diary_help"
+        android:orderInCategory="85"
+        app:showAsAction="never"/>
+</menu>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:title="用户">
+    <menu>
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_center_user"
+            android:title="@string/account_name"/>
+        <item
+            android:id="@+id/nav_friend"
+            android:icon="@drawable/ic_center_friends"
+            android:title="@string/friends"/>
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_center_article"
+            android:title="@string/history"/>
+        <item
+            android:id="@+id/nav_manage"
+
+            android:title="Tools"/>
+    </menu>
+</item>
+
+<item android:title="@string/setting">
+    <menu>
+        <item
+            android:id="@+id/nav_change"
+            android:icon="@drawable/ic_center_change"
+            android:title="@string/change"/>
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_center_exit"
+            android:title="@string/exit"/>
+    </menu>
+</item>
+</menu>

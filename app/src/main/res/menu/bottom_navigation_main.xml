@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_push"
+        android:enabled="true"
+        android:icon="@drawable/ic_frag_push"
+        android:title="@string/title_push"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_community"
+        android:enabled="true"
+        android:icon="@drawable/ic_frag_community"
+        android:title="@string/title_community"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_diary"
+        android:enabled="true"
+        android:icon="@drawable/ic_frag_diary"
+        android:title="@string/title_diary"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_step"
+        android:enabled="true"
+        android:icon="@drawable/ic_frag_center"
+        android:title="@string/title_step"
+        app:showAsAction="ifRoom"/>
+</menu>
