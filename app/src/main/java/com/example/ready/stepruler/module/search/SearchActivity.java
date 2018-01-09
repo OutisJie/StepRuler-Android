@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private UserApi userApi = RetrofitFactory.getRetrofit().create(UserApi.class);
-    private ArticleApi articleApi =  RetrofitFactory.getRetrofit().create(ArticleApi.class);
+    private ArticleApi articleApi = RetrofitFactory.getRetrofit().create(ArticleApi.class);
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);
@@ -102,7 +102,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.search_searchButton:
                 if (searchSelect.equals("用户")) {
-                    Call<ArrayList<String>> call = userApi.search("test");
+                    Call<ArrayList<String>> call = userApi.search(searchData);
                     call.enqueue(new Callback<ArrayList<String>>() {
                         @Override
                         public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {

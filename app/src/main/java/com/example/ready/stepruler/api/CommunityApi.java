@@ -7,6 +7,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -17,7 +18,6 @@ import retrofit2.http.Query;
  */
 
 public interface CommunityApi {
-    String Host = "http://10.0.2.2:8080/";
 
     //点赞
     @PUT("community/iszan")
@@ -42,5 +42,17 @@ public interface CommunityApi {
     //发表说说
     @POST("community/post")
     Call<String> post(@Body CommunityBean community);
+
+    //发表说说
+    @POST("community/post")
+    Call<String> post(@Query("user_id")int user_id,
+                      @Query("community_date")String date,
+                      @Query("community_text")String text,
+                      @Query("community_zan")int zan,
+                      @Query("community_comment")int comment);
+
+    //删除说说
+    @DELETE("community/delete")
+    Call<List<CommunityBean>> delete(@Query("community_id") int id, @Query("user_id") int user_id);
 
 }

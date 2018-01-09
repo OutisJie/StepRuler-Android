@@ -22,11 +22,11 @@ import retrofit2.http.Query;
  */
 
 public interface UserApi {
-    @POST("register")
+    @POST("user/register")
     Call<ResponseBody> addUser(@Body User user);
 
-    @POST("login")
-    Call<Integer> login(@Body User user);
+    @POST("user/login")
+    Call<Integer> login(@Query("user_name") String name, @Query("user_pwd")String pwd);
 
     @POST("user/search")
     Call<ArrayList<String>> search(@Query("user_name") String name);
@@ -38,7 +38,7 @@ public interface UserApi {
     Call<Boolean> addFriend(@Query("user_id1") int id1, @Query("user_id2") int id2);
 
     @GET("user/getDevice")
-    Call<String> getDevice(@Query("user_name") String user_name, @Query("user_id") int id);
+    Call<String> getDevice(@Query("user_name") String name, @Query("user_id") int id);
 
     //获取好友列表
     @GET(value = "/user/friends")
@@ -48,4 +48,9 @@ public interface UserApi {
     @POST(value = "/user/postImg")
     @Multipart
     Observable<String> updatePhoto(@Query("user_id") int user_id, @Part MultipartBody.Part photo);
+
+    //获取用户信息
+    @GET(value = "/user/getUserInfo")
+    Call<List<String>> getUserInfo(@Query("user_id") int id);
+
 }

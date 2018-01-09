@@ -69,7 +69,7 @@ public class PushArticlePresenter implements IPushArticleView.Presenter {
                     public void accept(Throwable throwable) throws Exception {
                         //网络异常
                         doShowNetError();
-                        if(BuildConfig.DEBUG){
+                        if (BuildConfig.DEBUG) {
                             throwable.printStackTrace();
                         }
                     }
@@ -80,6 +80,7 @@ public class PushArticlePresenter implements IPushArticleView.Presenter {
     public void doLoadMoreData() {
         doLoadData();
     }
+
     @Override
     public void doSetAdapter(List<PushArticleDataBean> list) {
         dataBeanList.addAll(list);
@@ -96,18 +97,20 @@ public class PushArticlePresenter implements IPushArticleView.Presenter {
         view.onShowLoading();
         doLoadData();
     }
+
     @Override
     public void doShowNetError() {
         view.onHideLoading();
         view.onShowNetError();
     }
+
     @Override
     public void doShowNoMore() {
         view.onHideLoading();
         view.onShowNoMore();
     }
 
-    private Observable<List<PushArticleDataBean>> getRandom(){
+    private Observable<List<PushArticleDataBean>> getRandom() {
         int random = new Random().nextInt(10) + 5;
         Observable<List<PushArticleDataBean>> ob = RetrofitFactory.getRetrofit().create(ArticleApi.class)
                 .getArticleList(random);

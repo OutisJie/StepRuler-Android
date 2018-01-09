@@ -102,18 +102,19 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Call<String> call = RetrofitFactory.getRetrofit().create(UserApi.class).getDevice(username, MainActivity.getUser().getUserId());
+
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         if (response.body() != null && !response.body().equals("-1") && !response.body().equals("-2")) {
-                            String channel = "zhangjiahao";
+                            String channel = username;
                             String message = "你收到一份好友请求";
 
                             //发送添加好友的请求
                             AVPush push = new AVPush();
 
                             AVQuery<AVInstallation> query = AVInstallation.getQuery();
-                            query.whereEqualTo("installationId", response.body());
+                            query.whereEqualTo("installationId", response.body().replace("\"", ""));
                             push.setQuery(query);
                             push.setChannel(channel.trim());
                             JSONObject jsonObject = new JSONObject();
@@ -146,7 +147,7 @@ public class MyAdapter extends BaseAdapter {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -88,8 +88,7 @@ public class LoginActivity extends Activity implements View.OnClickListener,Logi
                         Toast.makeText(LoginActivity.this, "请输入密码！", Toast.LENGTH_SHORT).show();
                         break;
                     } else {
-                        User user=new User(mId,mPwd);
-                        loginPresenter.doLogin(user);
+                        loginPresenter.doLogin(mId, mPwd);
                         break;
                     }
                 }

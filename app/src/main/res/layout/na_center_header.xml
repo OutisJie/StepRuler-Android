@@ -20,7 +20,7 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@mipmap/ic_user_header"/>
+        app:srcCompat="@drawable/ice_user_header"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

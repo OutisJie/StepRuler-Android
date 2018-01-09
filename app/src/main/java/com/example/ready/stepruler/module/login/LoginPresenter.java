@@ -32,8 +32,8 @@ public class LoginPresenter implements OnLoginFinishedListener {
         this.loginModel = new LoginModel();
     }
 
-    public void doLogin(User user) {
-        loginModel.login(user, this);
+    public void doLogin(String name, String pwd) {
+        loginModel.login(name, pwd, this);
     }
 
     @Override

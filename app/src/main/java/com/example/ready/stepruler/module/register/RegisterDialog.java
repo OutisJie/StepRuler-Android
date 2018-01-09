@@ -16,10 +16,10 @@ import com.example.ready.stepruler.module.login.User;
 import com.example.ready.stepruler.utils.RandomUtil;
 
 
-public class RegisterDialog extends Dialog implements View.OnClickListener,RegisterView{
+public class RegisterDialog extends Dialog implements View.OnClickListener,RegisterView {
     Activity context;
     private EditText idText;
-    private EditText passwordText,passwordText2;
+    private EditText passwordText, passwordText2;
     private EditText codeText;
     private Button registerButton;
     private Button cancleButton;
@@ -28,81 +28,97 @@ public class RegisterDialog extends Dialog implements View.OnClickListener,Regis
     private String mPwd;
     private String mPwd2;
     private String mCode;
-    private String result="default";
+    private String result = "default";
     //产生的验证码
     private String realCode;
 
     private RegisterPresenter registerPresenter;
 
-    public RegisterDialog(Activity context){
+    public RegisterDialog(Activity context) {
         super(context);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.register);
         initView();
         setListener();
         this.setCancelable(true);
 
-        registerPresenter=new RegisterPresenter(this);
+        registerPresenter = new RegisterPresenter(this);
     }
 
-    public void initView(){
-        idText=(EditText)findViewById(R.id.idText);
-        passwordText=(EditText)findViewById(R.id.passwordText);
-        passwordText2=(EditText)findViewById(R.id.passwordText2);
-        codeText=(EditText)findViewById(R.id.codeText);
-        registerButton=(Button)findViewById(R.id.button);
-        cancleButton=(Button)findViewById(R.id.button2);
-        imageView=(ImageView)findViewById(R.id.imageView);
+    public void initView() {
+        idText = (EditText) findViewById(R.id.idText);
+        passwordText = (EditText) findViewById(R.id.passwordText);
+        passwordText2 = (EditText) findViewById(R.id.passwordText2);
+        codeText = (EditText) findViewById(R.id.codeText);
+        registerButton = (Button) findViewById(R.id.button);
+        cancleButton = (Button) findViewById(R.id.button2);
+        imageView = (ImageView) findViewById(R.id.imageView);
         //将验证码用图片的形式显示出来
         imageView.setImageBitmap(RandomUtil.getInstance().createBitmap());
         realCode = RandomUtil.getInstance().getCode().toLowerCase();
     }
 
-    public void setListener(){
+    public void setListener() {
         idText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mName=s.toString();
+                mName = s.toString();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
         passwordText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPwd=s.toString();
+                mPwd = s.toString();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
         passwordText2.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPwd2=s.toString();
+                mPwd2 = s.toString();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
         codeText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCode=s.toString();
+                mCode = s.toString();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
         registerButton.setOnClickListener(this);
         cancleButton.setOnClickListener(this);
@@ -110,27 +126,27 @@ public class RegisterDialog extends Dialog implements View.OnClickListener,Regis
     }
 
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.button:
-                if(mName==null || mName.equals("")){
+                if (mName == null || mName.equals("")) {
                     Toast.makeText(context, "请输入账号！", Toast.LENGTH_SHORT).show();
                     break;
-                }else if(mName.length()<6||mName.length()>16) {
-                    Toast.makeText(context,"账号长度不正确！",Toast.LENGTH_SHORT).show();
-                }else if(mPwd == null || mPwd.equals("")){
+                } else if (mName.length() < 6 || mName.length() > 16) {
+                    Toast.makeText(context, "账号长度不正确！", Toast.LENGTH_SHORT).show();
+                } else if (mPwd == null || mPwd.equals("")) {
                     Toast.makeText(context, "请输入密码！", Toast.LENGTH_SHORT).show();
                     break;
-                }else if(mPwd.length()<6||mPwd.length()>22){
-                    Toast.makeText(context,"密码长度不正确！",Toast.LENGTH_SHORT).show();
-                }else if(mPwd2==null||!mPwd2.equals(mPwd)){
+                } else if (mPwd.length() < 6 || mPwd.length() > 22) {
+                    Toast.makeText(context, "密码长度不正确！", Toast.LENGTH_SHORT).show();
+                } else if (mPwd2 == null || !mPwd2.equals(mPwd)) {
                     Toast.makeText(context, "两次输入的密码不同！", Toast.LENGTH_SHORT).show();
                     break;
-                }else if(mCode==null||!mCode.equals(realCode)){
-                    Toast.makeText(context,"验证码错误！",Toast.LENGTH_SHORT).show();
+                } else if (mCode == null || !mCode.equals(realCode)) {
+                    Toast.makeText(context, "验证码错误！", Toast.LENGTH_SHORT).show();
                     break;
-                }else {
-                    User user=new User(mName,mPwd);
+                } else {
+                    User user = new User(mName, mPwd);
                     registerPresenter.doRegister(user);
                     break;
                 }
@@ -147,11 +163,18 @@ public class RegisterDialog extends Dialog implements View.OnClickListener,Regis
     }
 
     @Override
-    public String getUsername() {return mName;}
+    public String getUsername() {
+        return mName;
+    }
 
     @Override
-    public String getPassword() {return mPwd;}
+    public String getPassword() {
+        return mPwd;
+    }
 
     @Override
-    public void showToast(String msg) {Toast.makeText(this.context,msg,Toast.LENGTH_SHORT).show();}
+    public void showToast(String msg) {
+        Toast.makeText(this.context, msg, Toast.LENGTH_SHORT).show();
+        dismiss();
+    }
 }

@@ -48,7 +48,10 @@
             android:label="@string/title_activity_friends"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".module.community.editor.EditCommunityActivity" />
+        <activity
+            android:name=".module.community.editor.EditCommunityActivity"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <!-- 计步服务 -->
         <service
             android:name=".module.Step.accelerate.StepService"

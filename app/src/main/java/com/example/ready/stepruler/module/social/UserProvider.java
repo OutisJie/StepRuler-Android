@@ -57,7 +57,7 @@ public class UserProvider implements LCChatProfileProvider {
     public void addUsers(List<UserBean> list){
         partUsers.clear();
         for (UserBean user : list){
-            partUsers.add(new LCChatKitUser(String.valueOf(user.getUserId()), user.getUserName(),null));
+            partUsers.add(new LCChatKitUser(String.valueOf(user.getUserId()), user.getUserName(),user.getUserImg()));
         }
     }
 }

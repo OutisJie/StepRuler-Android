@@ -39,7 +39,7 @@ public class CommHot extends BaseListFragment<ICommunityView.Presenter> implemen
     protected void initView(final View view) {
         super.initView(view);
         adapter = new MultiTypeAdapter(oldItems);
-        BindItem.registerCommunityItem(adapter);
+        BindItem.registerCommunityHotItem(adapter);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
             @Override

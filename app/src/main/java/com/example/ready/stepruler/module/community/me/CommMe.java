@@ -1,13 +1,12 @@
 package com.example.ready.stepruler.module.community.me;
 
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.end.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingEndBean;
 import com.example.ready.stepruler.binder.BindItem;
-import com.example.ready.stepruler.utils.DiffCallUtil;
 import com.example.ready.stepruler.module.base.BaseListFragment;
 import com.example.ready.stepruler.module.community.ICommunityView;
 import com.example.ready.stepruler.module.community.editor.EditCommunityActivity;
@@ -24,15 +23,15 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 public class CommMe extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View {
     private static final String Tag = "CommunityMe";
-    //浮动按钮
-    private FloatingActionButton  addCommunity;
-    public static CommMe newInstance() {
-        return new CommMe();
+    private FloatingActionButton addCommunity;
+
+    public static CommMe newInstance(){
+        instance = new CommMe();
+        return instance;
     }
 
     @Override
     protected int attachLayoutId() {
-        super.attachLayoutId();
         return R.layout.fragment_community_me;
     }
 
@@ -65,16 +64,13 @@ public class CommMe extends BaseListFragment<ICommunityView.Presenter> implement
             }
         });
 
-        addCommunity=(FloatingActionButton)view.findViewById(R.id.add_community);
+        addCommunity = (FloatingActionButton) view.findViewById(R.id.add_community);
         addCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(view.getContext(), EditCommunityActivity.class);
-                view.getContext().startActivity(intent);
+                EditCommunityActivity.startActivity(getContext());
             }
         });
-
-
     }
 
     @Override
@@ -93,11 +89,44 @@ public class CommMe extends BaseListFragment<ICommunityView.Presenter> implement
     @Override
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
-        newItems.add(new LoadingBean());
-        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.MY_COMMUNITY, adapter);
+        if(newItems.size() > 6) {
+            newItems.add(new LoadingBean());
+        }
+        else {
+            newItems.add(new LoadingEndBean());
+        }
+       // DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.MY_COMMUNITY, adapter);
+        adapter.setItems(newItems);
+        adapter.notifyDataSetChanged();
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = true;
         canRefresh = true;
+    }
+
+    private static CommMe instance;
+    public static CommMe getInstace(){
+        if(instance == null){
+            return new CommMe();
+        }
+        return instance;
+    }
+
+    public void update(List<?> list){
+        Items newItems = new Items(list);
+        if(newItems.size() > 6) {
+            newItems.add(new LoadingBean());
+        }
+        else {
+            newItems.add(new LoadingEndBean());
+        }
+        adapter.setItems(newItems);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+
     }
 }

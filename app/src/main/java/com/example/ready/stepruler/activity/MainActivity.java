@@ -46,6 +46,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.leancloud.chatkit.LCChatKitUser;
+import cn.leancloud.chatkit.cache.LCIMProfileCache;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -304,8 +306,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .open(this);
     }
 
-    private void updatePhoto (final String filename) {
-            Luban.with(this)
+    private void updatePhoto(final String filename) {
+        Luban.with(this)
                 .load(filename)
                 .ignoreBy(100)
                 .setCompressListener(new OnCompressListener() {
@@ -326,7 +328,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .subscribe(new Consumer<String>() {
                                     @Override
                                     public void accept(String s) throws Exception {
-                                        ImageLoadUtil.loadCenterCrop(MainActivity.this, s, mImageView, R.color.viewBackground);
+                                        ImageLoadUtil.loadCenterCrop(MainActivity.this, s.toString(), mImageView, R.color.viewBackground, R.drawable.ice_user_header);
+                                        LCChatKitUser user = new LCChatKitUser(String.valueOf(getUser().getUserId()), getUser().getUserName(), s.toString());
+                                        LCIMProfileCache.getInstance().cacheUser(user);
                                     }
                                 }, new Consumer<Throwable>() {
                                     @Override

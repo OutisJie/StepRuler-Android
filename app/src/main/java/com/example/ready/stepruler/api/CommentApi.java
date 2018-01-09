@@ -13,9 +13,15 @@ import retrofit2.http.Query;
  */
 
 public interface CommentApi {
-    String Host="http://10.0.2.2:8080/";
 
     //获取当前说说的评论内容
     @POST("comment/getComments")
     Call<ArrayList<CommentBean>> getComments(@Query("community_id") int community_id);
+
+    //为当前说说添加评论
+    @POST("comment/addComment")
+    Call<ArrayList<CommentBean>> addComment(@Query("community_id") int community_id,
+                                            @Query("comment_text") String comment_text,
+                                            @Query("user_name") String user_name);
+
 }
