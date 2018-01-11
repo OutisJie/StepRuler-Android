@@ -1,6 +1,5 @@
 package com.example.ready.stepruler.utils;
 
-import com.example.ready.stepruler.api.ArticleApi;
 import com.franmontiel.persistentcookiejar.BuildConfig;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -29,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitFactory {
     private static final Object object = new Object();
     private volatile static Retrofit retrofit;
+    static String Host = "http://39.108.173.192:80/";
 
     /**
      * 缓存机制
@@ -88,7 +88,7 @@ public class RetrofitFactory {
                 }
                 //retrofit
                 retrofit = new Retrofit.Builder()
-                        .baseUrl(ArticleApi.Host)
+                        .baseUrl(Host)
                         .client(builder.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

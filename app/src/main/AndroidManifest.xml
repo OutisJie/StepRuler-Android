@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,11 +46,11 @@
         <activity
             android:name=".module.social.FriendsActivity"
             android:label="@string/title_activity_friends"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".module.community.editor.EditCommunityActivity"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <!-- 计步服务 -->
         <service
@@ -105,7 +105,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.InvitationActivity"></activity>
+        <activity android:name=".module.social.InvitationActivity"></activity>
     </application>
 
 </manifest>

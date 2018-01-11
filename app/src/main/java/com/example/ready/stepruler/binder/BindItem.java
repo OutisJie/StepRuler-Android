@@ -8,6 +8,7 @@ import com.example.ready.stepruler.bean.diary.DiaryBean;
 import com.example.ready.stepruler.bean.end.LoadingBean;
 import com.example.ready.stepruler.bean.end.LoadingEndBean;
 import com.example.ready.stepruler.bean.push.PushArticleDataBean;
+import com.example.ready.stepruler.binder.community.CommunityMeViewBinder;
 import com.example.ready.stepruler.binder.community.CommunityViewBinder;
 import com.example.ready.stepruler.binder.diary.DiaryViewBinder;
 import com.example.ready.stepruler.binder.end.LoadingEndViewBinder;
@@ -93,12 +94,12 @@ public class BindItem {
     //社区我的文章
     public static void registerCommunityMeItem(@Nonnull MultiTypeAdapter adapter) {
         adapter.register(CommunityBean.class)
-                .to(new CommunityViewBinder())
+                .to(new CommunityMeViewBinder())
                 .withClassLinker(new ClassLinker<CommunityBean>() {
                     @NonNull
                     @Override
                     public Class<? extends ItemViewBinder<CommunityBean, ?>> index(@NonNull CommunityBean communityBean) {
-                        return CommunityViewBinder.class;
+                        return CommunityMeViewBinder.class;
                     }
                 });
         adapter.register(LoadingBean.class, new LoadingViewBinder());

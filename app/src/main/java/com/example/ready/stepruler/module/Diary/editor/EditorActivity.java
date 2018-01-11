@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.database.DiaryDataBaseHelper;
-import com.example.ready.stepruler.module.Diary.diarys.DiaryTabLayout;
+import com.example.ready.stepruler.module.Diary.diarys.DiaryFragment;
 import com.example.ready.stepruler.utils.AppManager;
 import com.example.ready.stepruler.widget.LineEditWidget;
 
@@ -109,7 +109,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorView {
             values.clear();
             //返回到mainActivity,并刷新日记
             AppManager.getAppManager().finishActivity(EditorActivity.this);
-            DiaryTabLayout.getInstace().onReloadDiary();
+            DiaryFragment.getInstace().onReloadDiary();
         }
 
     }
@@ -136,7 +136,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorView {
                     values.clear();
                     //返回到mainActivity,并刷新日记
                     AppManager.getAppManager().finishActivity(EditorActivity.this);
-                    DiaryTabLayout.getInstace().onReloadDiary();
+                    DiaryFragment.getInstace().onReloadDiary();
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override

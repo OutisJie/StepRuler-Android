@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.module.social.friends;
+package com.example.ready.stepruler.module.social;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.binder.friends.FriendsViewBinder;
-import com.example.ready.stepruler.module.social.UserProvider;
 import com.example.ready.stepruler.widget.LetterWidget;
 
 import java.util.ArrayList;

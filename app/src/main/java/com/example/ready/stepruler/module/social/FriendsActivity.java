@@ -14,7 +14,6 @@ import android.view.View;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.adapter.BasePagerAdapter;
 import com.example.ready.stepruler.module.search.SearchActivity;
-import com.example.ready.stepruler.module.social.friends.FriendsFragment;
 import com.example.ready.stepruler.utils.AppManager;
 
 import java.util.Arrays;

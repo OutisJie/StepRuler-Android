@@ -85,7 +85,7 @@
                 android:layout_below="@+id/option"
                 android:id="@+id/lv_community_comment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="22dp">
             </ListView>
     </RelativeLayout>
     <!--评论框-->

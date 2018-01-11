@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.module.register.RegisterDialog;
 
 
@@ -117,8 +117,10 @@ public class LoginActivity extends Activity implements View.OnClickListener,Logi
         Bundle bundle = new Bundle();
         bundle.putString("user_name", mId);
         bundle.putInt("user_id", user_id);
+        bundle.putBoolean("state", true);
         intent.putExtras(bundle);
         this.startActivity(intent);
+      //  MainActivity.setState();
         this.finish();
     }
 }

@@ -2,7 +2,9 @@ package com.example.ready.stepruler.module.community.me;
 
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.end.LoadingBean;
 import com.example.ready.stepruler.bean.end.LoadingEndBean;
@@ -21,12 +23,12 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by single dog on 2017/12/28.
  */
 
-public class CommMe extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View {
+public class CommMeFragment extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View {
     private static final String Tag = "CommunityMe";
     private FloatingActionButton addCommunity;
 
-    public static CommMe newInstance(){
-        instance = new CommMe();
+    public static CommMeFragment newInstance() {
+        instance = new CommMeFragment();
         return instance;
     }
 
@@ -68,7 +70,11 @@ public class CommMe extends BaseListFragment<ICommunityView.Presenter> implement
         addCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditCommunityActivity.startActivity(getContext());
+                if (MainActivity.getLoginState() == true) {
+                    EditCommunityActivity.startActivity(getContext());
+                } else {
+                    Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -89,13 +95,12 @@ public class CommMe extends BaseListFragment<ICommunityView.Presenter> implement
     @Override
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
-        if(newItems.size() > 6) {
+        if (newItems.size() > 6) {
             newItems.add(new LoadingBean());
-        }
-        else {
+        } else {
             newItems.add(new LoadingEndBean());
         }
-       // DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.MY_COMMUNITY, adapter);
+        // DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.MY_COMMUNITY, adapter);
         adapter.setItems(newItems);
         adapter.notifyDataSetChanged();
         oldItems.clear();
@@ -104,20 +109,20 @@ public class CommMe extends BaseListFragment<ICommunityView.Presenter> implement
         canRefresh = true;
     }
 
-    private static CommMe instance;
-    public static CommMe getInstace(){
-        if(instance == null){
-            return new CommMe();
+    private static CommMeFragment instance;
+
+    public static CommMeFragment getInstace() {
+        if (instance == null) {
+            return new CommMeFragment();
         }
         return instance;
     }
 
-    public void update(List<?> list){
+    public void update(List<?> list) {
         Items newItems = new Items(list);
-        if(newItems.size() > 6) {
+        if (newItems.size() > 6) {
             newItems.add(new LoadingBean());
-        }
-        else {
+        } else {
             newItems.add(new LoadingEndBean());
         }
         adapter.setItems(newItems);

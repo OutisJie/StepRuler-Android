@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ready.stepruler.module.social.friends.FriendsFragment">
+    tools:context="com.example.ready.stepruler.module.social.FriendsFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

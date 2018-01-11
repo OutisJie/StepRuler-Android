@@ -17,10 +17,10 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by ready on 2017/12/9.
  */
 
-public class PushArticle extends BaseListFragment<IPushArticleView.Presenter> implements IPushArticleView.View{
+public class PushArticleFragment extends BaseListFragment<IPushArticleView.Presenter> implements IPushArticleView.View{
 
-    public static PushArticle newInstance() {
-       return new PushArticle();
+    public static PushArticleFragment newInstance() {
+       return new PushArticleFragment();
     }
     @Override
     protected void initData() throws NullPointerException {

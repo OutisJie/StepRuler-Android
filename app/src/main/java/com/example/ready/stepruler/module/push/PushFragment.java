@@ -12,8 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.adapter.BasePagerAdapter;
-import com.example.ready.stepruler.module.push.Photo.PushPhoto;
-import com.example.ready.stepruler.module.push.article.PushArticle;
+import com.example.ready.stepruler.module.push.article.PushArticleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +21,18 @@ import java.util.List;
  * Created by ready on 2017/11/20.
  */
 
-public class PushTabLayout extends Fragment {
-    public static final String TAG = "PushTabLayout";
-    private static PushTabLayout instance = null;
+public class PushFragment extends Fragment {
+    public static final String TAG = "PushFragment";
+    private static PushFragment instance = null;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private List<String> titleList;
     private List<Fragment> fragmList;
     private LinearLayout linearLayout;
 
-    public static PushTabLayout getInstance(){
+    public static PushFragment getInstance(){
         if(instance == null)
-            instance = new PushTabLayout();
+            instance = new PushFragment();
         return instance;
     }
 
@@ -48,18 +47,15 @@ public class PushTabLayout extends Fragment {
     private void initView(View view) {
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout_push);
         mViewPager = (ViewPager)view.findViewById(R.id.view_pager_types);
-        mTabLayout.setTabMode(TabLayout.GRAVITY_CENTER);
+        mTabLayout.setTabMode(TabLayout.GRAVITY_FILL);
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.push_type_article),true);
-        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.push_type_photo), false);
 
         fragmList = new ArrayList<>();
 
-        fragmList.add(PushArticle.newInstance());
+        fragmList.add(PushArticleFragment.newInstance());
 
-        fragmList.add(PushPhoto.newInstance());
         titleList = new ArrayList<>();
         titleList.add("文章");
-        titleList.add("图片");
         BasePagerAdapter mPagerAdapter = new BasePagerAdapter(getChildFragmentManager(),fragmList,titleList);
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

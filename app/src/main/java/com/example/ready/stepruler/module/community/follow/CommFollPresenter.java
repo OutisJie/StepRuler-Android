@@ -1,7 +1,7 @@
 package com.example.ready.stepruler.module.community.follow;
 
 import com.example.ready.stepruler.BuildConfig;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.bean.community.CommunityBean;
 import com.example.ready.stepruler.api.CommunityApi;
 import com.example.ready.stepruler.module.community.ICommunityView;

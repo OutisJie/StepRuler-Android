@@ -30,9 +30,9 @@ import java.util.List;
  * Created by ready on 2017/12/3.
  */
 
-public class StepTabLayout extends Fragment {
-    private static final String Tag = "StepTabLayout";
-    private static StepTabLayout instance = null;
+public class StepFragment extends Fragment {
+    private static final String Tag = "StepFragment";
+    private static StepFragment instance = null;
     private boolean isBind = false;
 
     //控件
@@ -40,9 +40,9 @@ public class StepTabLayout extends Fragment {
     private StepArcWidget stepArcWidget;
     private ListView listView;
 
-    public static StepTabLayout getInstance() {
+    public static StepFragment getInstance() {
         if (instance == null) {
-            instance = new StepTabLayout();
+            instance = new StepFragment();
         }
         return instance;
     }

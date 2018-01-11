@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.module.social.friends;
+package com.example.ready.stepruler.module.social;
 
 import com.example.ready.stepruler.bean.user.UserBean;
 

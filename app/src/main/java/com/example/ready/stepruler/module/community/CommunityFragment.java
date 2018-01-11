@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.adapter.BasePagerAdapter;
-import com.example.ready.stepruler.module.community.follow.CommFoll;
-import com.example.ready.stepruler.module.community.hot.CommHot;
-import com.example.ready.stepruler.module.community.me.CommMe;
+import com.example.ready.stepruler.module.community.follow.CommFollFragment;
+import com.example.ready.stepruler.module.community.hot.CommHotFragment;
+import com.example.ready.stepruler.module.community.me.CommMeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +22,17 @@ import java.util.List;
  * Created by ready on 2017/12/3.
  */
 
-public class CommunityTabLayout extends Fragment {
-    private static final String Tag = "CommunityTabLayout";
-    private static CommunityTabLayout instance = null;
+public class CommunityFragment extends Fragment {
+    private static final String Tag = "CommunityFragment";
+    private static CommunityFragment instance = null;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private List<String> titleList;
     private List<Fragment> fragmList;
 
-    public static CommunityTabLayout getInstance() {
+    public static CommunityFragment getInstance() {
         if(instance == null)
-            instance = new CommunityTabLayout();
+            instance = new CommunityFragment();
         return instance;
     }
 
@@ -62,9 +62,9 @@ public class CommunityTabLayout extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText("我的文章"),false );
 
         fragmList = new ArrayList<>();
-        fragmList.add(CommHot.newInstance());
-        fragmList.add(CommFoll.newInstance());
-        fragmList.add(CommMe.newInstance());
+        fragmList.add(CommHotFragment.newInstance());
+        fragmList.add(CommFollFragment.newInstance());
+        fragmList.add(CommMeFragment.newInstance());
         titleList = new ArrayList<>();
         titleList.add("热门文章");
         titleList.add("我的关注");

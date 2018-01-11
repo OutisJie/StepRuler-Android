@@ -23,7 +23,7 @@ import android.util.Log;
 import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.bean.step.StepBean;
 import com.example.ready.stepruler.database.StepDBHelper;
-import com.example.ready.stepruler.module.Step.StepTabLayout;
+import com.example.ready.stepruler.module.Step.StepFragment;
 import com.example.ready.stepruler.module.Step.UpdateUiCallBack;
 
 import java.text.SimpleDateFormat;
@@ -243,7 +243,7 @@ public class StepService extends Service implements SensorEventListener{
     //更新步数通知
     private void updateNotification() {
         //设置点击跳转
-        Intent hangIntent = new Intent(this, StepTabLayout.getInstance().getClass());
+        Intent hangIntent = new Intent(this, StepFragment.getInstance().getClass());
         PendingIntent hangPendingIntent = PendingIntent.getActivity(this, 0, hangIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification notification = builder.setContentTitle(getResources().getString(R.string.app_name))

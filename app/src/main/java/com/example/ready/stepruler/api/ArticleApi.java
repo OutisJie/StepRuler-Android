@@ -17,7 +17,7 @@ import retrofit2.http.Query;
  */
 
 public interface ArticleApi {
-    String Host = "http://10.0.2.2:8080/";
+
 
     //获取所有文章
     @GET(value = "article/list/{random}")

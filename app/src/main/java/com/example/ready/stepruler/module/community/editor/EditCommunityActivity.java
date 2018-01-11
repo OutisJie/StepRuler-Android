@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.api.CommunityApi;
-import com.example.ready.stepruler.module.community.me.CommMe;
+import com.example.ready.stepruler.module.community.me.CommMeFragment;
 import com.example.ready.stepruler.utils.RetrofitFactory;
 
 import java.text.SimpleDateFormat;
@@ -86,9 +86,9 @@ public class EditCommunityActivity extends AppCompatActivity {
             post.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                   // CommMe.getInstace().setCanfresh();
-                    //CommMe.getInstace().onSetAdapter(new ArrayList<Object>());
-                    CommMe.getInstace().onRefresh();
+                   // CommMeFragment.getInstace().setCanfresh();
+                    //CommMeFragment.getInstace().onSetAdapter(new ArrayList<Object>());
+                    CommMeFragment.getInstace().onRefresh();
                 }
 
                 @Override

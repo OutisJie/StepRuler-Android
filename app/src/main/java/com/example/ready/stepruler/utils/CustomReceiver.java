@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.InvitationActivity;
+import com.example.ready.stepruler.module.social.InvitationActivity;
 
 import org.json.JSONObject;
 

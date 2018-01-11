@@ -33,9 +33,9 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by ready on 2017/12/3.
  */
 
-public class DiaryTabLayout extends Fragment implements IDiaryView {
-    private static final String Tag = "DiaryTabLayout";
-    private static DiaryTabLayout instance = null;
+public class DiaryFragment extends Fragment implements IDiaryView {
+    private static final String Tag = "DiaryFragment";
+    private static DiaryFragment instance = null;
     //控件
     private ImageView iv_diary_circle;
     private TextView tv_diary_date;
@@ -53,9 +53,9 @@ public class DiaryTabLayout extends Fragment implements IDiaryView {
     private MultiTypeAdapter multiTypeAdapter;
     private Items diaryItems;
 
-    public static DiaryTabLayout getInstace() {
+    public static DiaryFragment getInstace() {
         if(instance == null)
-            instance = new DiaryTabLayout();
+            instance = new DiaryFragment();
         return instance;
     }
 

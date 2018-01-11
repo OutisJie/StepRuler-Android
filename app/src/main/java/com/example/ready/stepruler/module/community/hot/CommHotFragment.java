@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.module.community.follow;
+package com.example.ready.stepruler.module.community.hot;
 
 import android.view.View;
 
@@ -18,17 +18,17 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by ready on 2017/12/9.
  */
 
-public class CommFoll extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View {
+public class CommHotFragment extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View{
     private static final String Tag="CommunityHot";
 
-    public static CommFoll newInstance(){
-        return new CommFoll();
+    public static CommHotFragment newInstance(){
+        return new CommHotFragment();
     }
 
     @Override
     public void setPresenter(ICommunityView.Presenter presenter) {
         if (presenter == null)
-            this.presenter = new CommFollPresenter(this);
+            this.presenter = new CommHotPresenter(this);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CommFoll extends BaseListFragment<ICommunityView.Presenter> impleme
     protected void initView(final View view) {
         super.initView(view);
         adapter = new MultiTypeAdapter(oldItems);
-        BindItem.registerCommunityFollItem(adapter);
+        BindItem.registerCommunityHotItem(adapter);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
             @Override
@@ -72,7 +72,7 @@ public class CommFoll extends BaseListFragment<ICommunityView.Presenter> impleme
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
         newItems.add(new LoadingBean());
-        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.FRIENDS_COMMUNITY, adapter);
+        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.HOT_COMMUNITY, adapter);
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = true;

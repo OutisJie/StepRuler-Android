@@ -16,7 +16,7 @@ import com.avos.avoscloud.AVPush;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.SendCallback;
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
 import com.example.ready.stepruler.adapter.adapterItem.UserItem;
 import com.example.ready.stepruler.utils.RetrofitFactory;
@@ -101,55 +101,59 @@ public class MyAdapter extends BaseAdapter {
         userItem.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<String> call = RetrofitFactory.getRetrofit().create(UserApi.class).getDevice(username, MainActivity.getUser().getUserId());
+                if (MainActivity.getLoginState() == true) {
+                    Call<String> call = RetrofitFactory.getRetrofit().create(UserApi.class).getDevice(username, MainActivity.getUser().getUserId());
 
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        if (response.body() != null && !response.body().equals("-1") && !response.body().equals("-2")) {
-                            String channel = username;
-                            String message = "你收到一份好友请求";
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.body() != null && !response.body().equals("-1") && !response.body().equals("-2")) {
+                                String channel = username;
+                                String message = "你收到一份好友请求，来自：" + MainActivity.getUser().getUserName();
 
-                            //发送添加好友的请求
-                            AVPush push = new AVPush();
+                                //发送添加好友的请求
+                                AVPush push = new AVPush();
 
-                            AVQuery<AVInstallation> query = AVInstallation.getQuery();
-                            query.whereEqualTo("installationId", response.body().replace("\"", ""));
-                            push.setQuery(query);
-                            push.setChannel(channel.trim());
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("action", "com.invitation.action");
-                            jsonObject.put("alert",message.trim());
-                            jsonObject.put("id",String.valueOf(MainActivity.getUser().getUserId()).trim());
+                                AVQuery<AVInstallation> query = AVInstallation.getQuery();
+                                query.whereEqualTo("installationId", response.body().replace("\"", ""));
+                                push.setQuery(query);
+                                push.setChannel(channel.trim());
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("action", "com.invitation.action");
+                                jsonObject.put("alert", message.trim());
+                                jsonObject.put("id", String.valueOf(MainActivity.getUser().getUserId()).trim());
 
-                            push.setData(jsonObject);
-                            push.setPushToAndroid(true);
-                            // 推送
-                            push.sendInBackground(new SendCallback() {
-                                @Override
-                                public void done(AVException e) {
-                                    Toast toast = null;
-                                    if (e == null) {
-                                        toast = Toast.makeText(context, "发送成功.", Toast.LENGTH_SHORT);
-                                    } else {
-                                        toast = Toast.makeText(context, "发送失败:" + e.getMessage(), Toast.LENGTH_LONG);
+                                push.setData(jsonObject);
+                                push.setPushToAndroid(true);
+                                // 推送
+                                push.sendInBackground(new SendCallback() {
+                                    @Override
+                                    public void done(AVException e) {
+                                        Toast toast = null;
+                                        if (e == null) {
+                                            toast = Toast.makeText(context, "发送成功.", Toast.LENGTH_SHORT);
+                                        } else {
+                                            toast = Toast.makeText(context, "发送失败:" + e.getMessage(), Toast.LENGTH_LONG);
+                                        }
+                                        // 放心大胆地show，我们保证 callback 运行在 UI 线程。
+                                        toast.show();
                                     }
-                                    // 放心大胆地show，我们保证 callback 运行在 UI 线程。
-                                    toast.show();
-                                }
-                            });
-                        } else if (response.body().equals("-1")) {
-                            Toast.makeText(context, "你们已经是好友啦！", Toast.LENGTH_SHORT).show();
-                        }else if (response.body().equals("-2")) {
-                            Toast.makeText(context, "此用户没有验证！", Toast.LENGTH_SHORT).show();
+                                });
+                            } else if (response.body().equals("-1")) {
+                                Toast.makeText(context, "你们已经是好友啦！", Toast.LENGTH_SHORT).show();
+                            } else if (response.body().equals("-2")) {
+                                Toast.makeText(context, "此用户没有验证！", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(context, "请先登录！", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         if (username.equals("没有查询到该数据")) userItem.button.setVisibility(View.INVISIBLE);

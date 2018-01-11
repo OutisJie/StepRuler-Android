@@ -1,9 +1,9 @@
-package com.example.ready.stepruler.module.social.friends;
+package com.example.ready.stepruler.module.social;
 
 import android.widget.Toast;
 
 import com.example.ready.stepruler.R;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
 import com.example.ready.stepruler.bean.user.UserBean;
 import com.example.ready.stepruler.utils.AppManager;

@@ -1,10 +1,10 @@
-package com.example.ready.stepruler.module.community.hot;
+package com.example.ready.stepruler.module.community.follow;
 
 import android.view.View;
 
 import com.example.ready.stepruler.bean.end.LoadingBean;
+import com.example.ready.stepruler.bean.end.LoadingEndBean;
 import com.example.ready.stepruler.binder.BindItem;
-import com.example.ready.stepruler.utils.DiffCallUtil;
 import com.example.ready.stepruler.module.base.BaseListFragment;
 import com.example.ready.stepruler.module.community.ICommunityView;
 import com.example.ready.stepruler.widget.listener.OnLoadMoreListener;
@@ -18,17 +18,17 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by ready on 2017/12/9.
  */
 
-public class CommHot extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View{
+public class CommFollFragment extends BaseListFragment<ICommunityView.Presenter> implements ICommunityView.View {
     private static final String Tag="CommunityHot";
 
-    public static CommHot newInstance(){
-        return new CommHot();
+    public static CommFollFragment newInstance(){
+        return new CommFollFragment();
     }
 
     @Override
     public void setPresenter(ICommunityView.Presenter presenter) {
         if (presenter == null)
-            this.presenter = new CommHotPresenter(this);
+            this.presenter = new CommFollPresenter(this);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CommHot extends BaseListFragment<ICommunityView.Presenter> implemen
     protected void initView(final View view) {
         super.initView(view);
         adapter = new MultiTypeAdapter(oldItems);
-        BindItem.registerCommunityHotItem(adapter);
+        BindItem.registerCommunityFollItem(adapter);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
             @Override
@@ -71,11 +71,36 @@ public class CommHot extends BaseListFragment<ICommunityView.Presenter> implemen
     @Override
     public void onSetAdapter(List<?> list) {
         Items newItems = new Items(list);
-        newItems.add(new LoadingBean());
-        DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.HOT_COMMUNITY, adapter);
+        if (newItems.size() > 6) {
+            newItems.add(new LoadingBean());
+        } else {
+            newItems.add(new LoadingEndBean());
+        }
+        // DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.MY_COMMUNITY, adapter);
+        adapter.setItems(newItems);
+        adapter.notifyDataSetChanged();
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = true;
         canRefresh = true;
+//        Items newItems = new Items(list);
+//        //newItems.add(new LoadingBean());
+//        if (newItems.size() > 6) {
+//            newItems.add(new LoadingBean());
+//        } else {
+//            newItems.add(new LoadingEndBean());
+//        }
+//        adapter.setItems(newItems);
+//        adapter.notifyDataSetChanged();
+//       // DiffCallUtil.notifyDataSetChanged(oldItems, newItems, DiffCallUtil.FRIENDS_COMMUNITY, adapter);
+//        oldItems.clear();
+//        oldItems.addAll(newItems);
+//        canLoadMore = true;
+//        canRefresh = true;
+    }
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+
     }
 }

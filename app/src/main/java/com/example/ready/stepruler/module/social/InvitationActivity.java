@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.activity;
+package com.example.ready.stepruler.module.social;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.ready.stepruler.R;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
 import com.example.ready.stepruler.utils.AppManager;
 import com.example.ready.stepruler.utils.RetrofitFactory;

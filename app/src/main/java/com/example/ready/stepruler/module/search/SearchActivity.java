@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -101,7 +102,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_searchButton:
-                if (searchSelect.equals("用户")) {
+                if (searchSelect.equals("用户") && !TextUtils.isEmpty(searchData)) {
                     Call<ArrayList<String>> call = userApi.search(searchData);
                     call.enqueue(new Callback<ArrayList<String>>() {
                         @Override
@@ -123,7 +124,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             t.printStackTrace();
                         }
                     });
-                } else if (searchSelect.equals("文章")) {
+                } else if (searchSelect.equals("文章") && !TextUtils.isEmpty(searchData)) {
                     Call<ArrayList<PushArticleDataBean>> call = articleApi.search("黄河");
                     call.enqueue(new Callback<ArrayList<PushArticleDataBean>>() {
                         @Override

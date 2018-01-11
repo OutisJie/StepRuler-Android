@@ -9,7 +9,7 @@ import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
-import com.example.ready.stepruler.activity.MainActivity;
+import com.example.ready.stepruler.MainActivity;
 import com.example.ready.stepruler.api.UserApi;
 import com.example.ready.stepruler.utils.AppManager;
 import com.example.ready.stepruler.utils.RetrofitFactory;

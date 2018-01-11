@@ -1,4 +1,4 @@
-package com.example.ready.stepruler.activity;
+package com.example.ready.stepruler;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,18 +18,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.ready.stepruler.R;
 import com.example.ready.stepruler.api.UserApi;
 import com.example.ready.stepruler.bean.user.UserBean;
-import com.example.ready.stepruler.module.Diary.diarys.DiaryTabLayout;
-import com.example.ready.stepruler.module.Step.StepTabLayout;
-import com.example.ready.stepruler.module.community.CommunityTabLayout;
+import com.example.ready.stepruler.module.Diary.diarys.DiaryFragment;
+import com.example.ready.stepruler.module.Step.StepFragment;
+import com.example.ready.stepruler.module.community.CommunityFragment;
 import com.example.ready.stepruler.module.login.LoginActivity;
-import com.example.ready.stepruler.module.push.PushTabLayout;
+import com.example.ready.stepruler.module.push.PushFragment;
 import com.example.ready.stepruler.module.search.SearchActivity;
 import com.example.ready.stepruler.module.social.FriendsActivity;
 import com.example.ready.stepruler.utils.AppManager;
@@ -66,15 +66,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_COMMUNITY = 1;
     private static final int FRAGMENT_DIARY = 2;
     private static final int FRAGMENT_STEP = 3;
-    private PushTabLayout mPushTabLayout;
-    private CommunityTabLayout mCommunityTabLayout;
-    private DiaryTabLayout mDiaryTabLayout;
-    private StepTabLayout mStepTabLayout;
+    private PushFragment mPushFragment;
+    private CommunityFragment mCommunityFragment;
+    private DiaryFragment mDiaryFragment;
+    private StepFragment mStepFragment;
     private Toolbar toolbar;
     private BottomNavigationView mBottomNavigationView;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private ImageView mImageView;
+    private static ImageView mImageView;
+    private static TextView mState;
     private long firstClickTime = 0;
     private long exitTime = 0;
     private int position;
@@ -97,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initView();
         getUserInformation();
         if (savedInstanceState != null) {
-            mPushTabLayout = (PushTabLayout) getSupportFragmentManager().findFragmentByTag(PushTabLayout.class.getName());
-            mCommunityTabLayout = (CommunityTabLayout) getSupportFragmentManager().findFragmentByTag(CommunityTabLayout.class.getName());
-            mDiaryTabLayout = (DiaryTabLayout) getSupportFragmentManager().findFragmentByTag(DiaryTabLayout.class.getName());
-            mStepTabLayout = (StepTabLayout) getSupportFragmentManager().findFragmentByTag(StepTabLayout.class.getName());
+            mPushFragment = (PushFragment) getSupportFragmentManager().findFragmentByTag(PushFragment.class.getName());
+            mCommunityFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag(CommunityFragment.class.getName());
+            mDiaryFragment = (DiaryFragment) getSupportFragmentManager().findFragmentByTag(DiaryFragment.class.getName());
+            mStepFragment = (StepFragment) getSupportFragmentManager().findFragmentByTag(StepFragment.class.getName());
             // 恢复 recreate 前的位置
             showFragment(savedInstanceState.getInt(POSITION));
             mBottomNavigationView.setSelectedItemId(savedInstanceState.getInt(SELECT_ITEM));
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         View centerHeader = mNavigationView.inflateHeaderView(R.layout.na_center_header);
         mImageView = (ImageView) centerHeader.findViewById(R.id.image_center_header);
+        mState = (TextView)centerHeader.findViewById(R.id.tv_state);
 
         setSupportActionBar(toolbar);
         BottomNavigationWidget.disableShiftMode(mBottomNavigationView);
@@ -169,10 +171,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (secondClickTime - firstClickTime < 500) {
             switch (index) {
                 case FRAGMENT_PUSH:
-                    mPushTabLayout.onDoubleClick();
+                    mPushFragment.onDoubleClick();
                     break;
                 case FRAGMENT_COMMUNITY:
-                    mCommunityTabLayout.onDoubleClick();
+                    mCommunityFragment.onDoubleClick();
                     break;
             }
         } else {
@@ -187,38 +189,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (index) {
             case FRAGMENT_PUSH:
                 toolbar.setTitle(R.string.title_push);
-                if (mPushTabLayout == null) {
-                    mPushTabLayout = PushTabLayout.getInstance();
-                    ft.add(R.id.container, mPushTabLayout, PushTabLayout.class.getName());
+                if (mPushFragment == null) {
+                    mPushFragment = PushFragment.getInstance();
+                    ft.add(R.id.container, mPushFragment, PushFragment.class.getName());
                 } else {
-                    ft.show(mPushTabLayout);
+                    ft.show(mPushFragment);
                 }
                 break;
             case FRAGMENT_COMMUNITY:
                 toolbar.setTitle(R.string.title_community);
-                if (mCommunityTabLayout == null) {
-                    mCommunityTabLayout = CommunityTabLayout.getInstance();
-                    ft.add(R.id.container, mCommunityTabLayout, CommunityTabLayout.class.getName());
+                if (mCommunityFragment == null) {
+                    mCommunityFragment = CommunityFragment.getInstance();
+                    ft.add(R.id.container, mCommunityFragment, CommunityFragment.class.getName());
                 } else {
-                    ft.show(mCommunityTabLayout);
+                    ft.show(mCommunityFragment);
                 }
                 break;
             case FRAGMENT_DIARY:
                 toolbar.setTitle(R.string.title_diary);
-                if (mDiaryTabLayout == null) {
-                    mDiaryTabLayout = DiaryTabLayout.getInstace();
-                    ft.add(R.id.container, mDiaryTabLayout, DiaryTabLayout.class.getName());
+                if (mDiaryFragment == null) {
+                    mDiaryFragment = DiaryFragment.getInstace();
+                    ft.add(R.id.container, mDiaryFragment, DiaryFragment.class.getName());
                 } else {
-                    ft.show(mDiaryTabLayout);
+                    ft.show(mDiaryFragment);
                 }
                 break;
             case FRAGMENT_STEP:
                 toolbar.setTitle(R.string.title_step);
-                if (mStepTabLayout == null) {
-                    mStepTabLayout = StepTabLayout.getInstance();
-                    ft.add(R.id.container, mStepTabLayout, StepTabLayout.class.getName());
+                if (mStepFragment == null) {
+                    mStepFragment = StepFragment.getInstance();
+                    ft.add(R.id.container, mStepFragment, StepFragment.class.getName());
                 } else {
-                    ft.show(mStepTabLayout);
+                    ft.show(mStepFragment);
                 }
                 break;
         }
@@ -227,17 +229,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void hideFragment(FragmentTransaction ft) {
         //如果几个fragment不为空，就先隐藏起来
-        if (mPushTabLayout != null) {
-            ft.hide(mPushTabLayout);
+        if (mPushFragment != null) {
+            ft.hide(mPushFragment);
         }
-        if (mCommunityTabLayout != null) {
-            ft.hide(mCommunityTabLayout);
+        if (mCommunityFragment != null) {
+            ft.hide(mCommunityFragment);
         }
-        if (mDiaryTabLayout != null) {
-            ft.hide(mDiaryTabLayout);
+        if (mDiaryFragment != null) {
+            ft.hide(mDiaryFragment);
         }
-        if (mStepTabLayout != null) {
-            ft.hide(mStepTabLayout);
+        if (mStepFragment != null) {
+            ft.hide(mStepFragment);
         }
     }
 
@@ -385,22 +387,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_account:
-                Toast.makeText(this, "您想要修改个人信息吗？", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "您想要修改个人信息吗？", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_friend:
                 FriendsActivity.lunch(MainActivity.this, 2, "张家浩");
                 break;
             case R.id.nav_history:
-                Toast.makeText(this, "想看历史文章？想多了吧", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "想看历史文章？想多了吧", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_manage:
-                Toast.makeText(this, "卧槽你还想要修改设置？", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "卧槽你还想要修改设置？", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_change:
-                Toast.makeText(this, "换个毛主题，就这样挺好的", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "换个毛主题，就这样挺好的", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_exit:
-                Toast.makeText(this, "我们还是朋友(-_-)", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "我们还是朋友(-_-)", Toast.LENGTH_SHORT).show();
                 break;
         }
         return false;
@@ -416,6 +418,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 isLogin = true;
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void setState(){
+        if (isLogin == true){
+            Toast.makeText(AppManager.getAppManager().currentActivity(), "nihao", Toast.LENGTH_SHORT).show();
+            ImageLoadUtil.loadCenterCrop(AppManager.getAppManager().currentActivity(),  getUser().getUserImg(), mImageView, R.drawable.ice_user_header);
+            mState.setText("点击修改头像");
         }
     }
 

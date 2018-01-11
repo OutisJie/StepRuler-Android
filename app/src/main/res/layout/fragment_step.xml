@@ -47,7 +47,7 @@
             android:id="@+id/lv_history"
             android:layout_below="@+id/tv_data"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="200dp" />
 
     </RelativeLayout>
 
